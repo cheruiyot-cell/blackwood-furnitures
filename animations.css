@@ -3,642 +3,226 @@ BLACKWOOD FURNITURES
 PREMIUM ANIMATION SYSTEM
 ========================================= */
 
-
 /* =========================================
 GLOBAL TRANSITIONS
 ========================================= */
-
-
 a,
 button,
 img,
 .category-card,
 .featured-small,
 .trust-box {
-
-    transition:
-    transform .4s ease,
-    opacity .4s ease,
-    background .4s ease,
-    color .4s ease;
-
+    transition: transform 0.4s ease, opacity 0.4s ease, background 0.4s ease, color 0.4s ease;
 }
-
-
-
-
 
 /* =========================================
 HERO ENTRANCE
 ========================================= */
-
-
 .fade-up {
-
-    animation:
-
-    fadeUp 1.2s ease forwards;
-
+    animation: fadeUp 1.2s ease forwards;
 }
-
-
 
 @keyframes fadeUp {
-
-
-from{
-
-    opacity:0;
-
-    transform:
-    translateY(50px);
-
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-
-
-to{
-
-    opacity:1;
-
-    transform:
-    translateY(0);
-
+.hero-tag {
+    animation: fadeUp 0.8s ease forwards;
 }
 
-
+/* Fixed: target the h1 inside .hero-text */
+.hero-text h1 {
+    animation: fadeUp 1s ease 0.2s forwards;
+    opacity: 0;
 }
 
-
-
-
-
-
-.hero-tag{
-
-    animation:
-
-    fadeUp .8s ease forwards;
-
+.hero-description {
+    animation: fadeUp 1s ease 0.4s forwards;
+    opacity: 0;
 }
 
-
-
-.hero h1{
-
-    animation:
-
-    fadeUp 1s ease .2s forwards;
-
-    opacity:0;
-
+.hero-buttons {
+    animation: fadeUp 1s ease 0.6s forwards;
+    opacity: 0;
 }
-
-
-
-.hero-description{
-
-    animation:
-
-    fadeUp 1s ease .4s forwards;
-
-    opacity:0;
-
-}
-
-
-
-.hero-buttons{
-
-    animation:
-
-    fadeUp 1s ease .6s forwards;
-
-    opacity:0;
-
-}
-
-
-
-
 
 /* =========================================
 SCROLL REVEAL
 ========================================= */
-
-
-.reveal{
-
-    opacity:0;
-
-    transform:
-
-    translateY(40px);
-
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
 }
 
-
-
-.reveal.active{
-
-    opacity:1;
-
-    transform:
-
-    translateY(0);
-
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
-
-
-
-
 
 /* =========================================
 HEADER EFFECT
 ========================================= */
-
-
-.header.scrolled{
-
-    background:
-
-    rgba(18,18,18,.95);
-
-    backdrop-filter:
-
-    blur(10px);
-
-    padding:18px 0;
-
-    box-shadow:
-
-    0 10px 30px rgba(0,0,0,.15);
-
+.header.scrolled {
+    background: rgba(18, 18, 18, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 18px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
-
-
-
-
-
-
 
 /* =========================================
 IMAGE HOVER EFFECTS
 ========================================= */
-
-
 .category-card img,
 .gallery-item img,
 .featured-small img,
-.craft-image img{
-
-
-    transition:
-
-    transform .8s ease;
-
-
+.craft-image img {
+    transition: transform 0.8s ease;
 }
-
-
 
 .category-card:hover img,
 .gallery-item:hover img,
-.featured-small:hover img{
-
-
-    transform:
-
-    scale(1.08);
-
-
+.featured-small:hover img {
+    transform: scale(1.08);
 }
-
-
-
-
-
 
 /* =========================================
 GOLD LINE EFFECT
 ========================================= */
-
-
-.nav-links a::after{
-
-
-    transition:
-
-    width .4s ease;
-
-
+.nav-links a::after {
+    transition: width 0.4s ease;
 }
-
-
-
-
-
 
 /* =========================================
 BUTTON PREMIUM EFFECT
 ========================================= */
-
-
-.btn{
-
-
-    position:relative;
-
-    overflow:hidden;
-
+.btn {
+    position: relative;
+    overflow: hidden;
 }
 
-
-
-.btn::before{
-
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-
-    left:-100%;
-
-    width:100%;
-
-    height:100%;
-
-
-    background:
-
-    rgba(255,255,255,.18);
-
-
-    transition:
-
-    left .5s ease;
-
-
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.18);
+    transition: left 0.5s ease;
 }
 
-
-
-.btn:hover::before{
-
-
-    left:100%;
-
-
+.btn:hover::before {
+    left: 100%;
 }
 
-
-
-
-
-.btn:hover{
-
-
-    transform:
-
-    translateY(-4px);
-
-
+.btn:hover {
+    transform: translateY(-4px);
 }
-
-
-
-
-
-
 
 /* =========================================
 STATISTICS ANIMATION
 ========================================= */
-
-
-.trust-box:hover{
-
-
-    transform:
-
-    translateY(-10px);
-
-
-    box-shadow:
-
-    0 15px 35px rgba(0,0,0,.12);
-
-
+.trust-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
 }
 
-
-
-
-
-
-
-.trust-box h2{
-
-
-    animation:
-
-    numberPulse 3s infinite;
-
-
+.trust-box h2 {
+    animation: numberPulse 3s infinite;
 }
 
-
-
-
-@keyframes numberPulse{
-
-
-0%{
-
-    opacity:.8;
-
+@keyframes numberPulse {
+    0%   { opacity: 0.8; }
+    50%  { opacity: 1; }
+    100% { opacity: 0.8; }
 }
-
-
-50%{
-
-    opacity:1;
-
-}
-
-
-100%{
-
-    opacity:.8;
-
-}
-
-
-}
-
-
-
-
-
-
-
 
 /* =========================================
 CATEGORY OVERLAY
 ========================================= */
-
-
-.category-overlay{
-
-
-    transition:
-
-    transform .5s ease;
-
-
+.category-overlay {
+    transition: transform 0.5s ease;
 }
 
-
-
-.category-card:hover .category-overlay{
-
-
-    transform:
-
-    translateY(-15px);
-
-
+.category-card:hover .category-overlay {
+    transform: translateY(-15px);
 }
-
-
-
-
-
-
 
 /* =========================================
 GALLERY EFFECTS
 ========================================= */
-
-
-.gallery-item{
-
-
-    overflow:hidden;
-
+.gallery-item {
+    overflow: hidden;
 }
 
-
-
-.gallery-caption{
-
-
-    opacity:0;
-
-    transform:
-
-    translateY(20px);
-
-
-    transition:
-
-    all .5s ease;
-
-
+.gallery-caption {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
 }
 
-
-
-.gallery-item:hover .gallery-caption{
-
-
-    opacity:1;
-
-    transform:
-
-    translateY(0);
-
-
+.gallery-item:hover .gallery-caption {
+    opacity: 1;
+    transform: translateY(0);
 }
-
-
-
-
-
-
 
 /* =========================================
 PROCESS STEPS
 ========================================= */
-
-
-.process-step:hover{
-
-
-    transform:
-
-    translateY(-10px);
-
-
+.process-step:hover {
+    transform: translateY(-10px);
 }
 
-
-
-.process-step span{
-
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-
-    width:60px;
-
-    height:60px;
-
-
-    border-radius:50%;
-
-
-    background:
-
-    var(--gold);
-
-
-    color:
-
-    var(--black);
-
-
-    font-weight:700;
-
-
+.process-step span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--black);
+    font-weight: 700;
 }
-
-
-
-
-
-
-
 
 /* =========================================
 WHATSAPP FLOATING BUTTON
 ========================================= */
-
-
-.whatsapp-button{
-
-
-    animation:
-
-    whatsappPulse 2.5s infinite;
-
-
+.whatsapp-button {
+    animation: whatsappPulse 2.5s infinite;
 }
 
-
-
-@keyframes whatsappPulse{
-
-
-0%{
-
-    box-shadow:
-
-    0 0 0 0 rgba(37,211,102,.5);
-
+@keyframes whatsappPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+    70%  { box-shadow: 0 0 0 18px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
 }
-
-
-
-70%{
-
-    box-shadow:
-
-    0 0 0 18px rgba(37,211,102,0);
-
-}
-
-
-
-100%{
-
-    box-shadow:
-
-    0 0 0 0 rgba(37,211,102,0);
-
-}
-
-
-}
-
-
-
-
-
 
 /* =========================================
 SMOOTH PAGE LOADING
 ========================================= */
-
-
-body{
-
-
-    animation:
-
-    pageLoad .7s ease;
-
-
+body {
+    animation: pageLoad 0.7s ease;
 }
 
-
-
-
-@keyframes pageLoad{
-
-
-from{
-
-    opacity:0;
-
+@keyframes pageLoad {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
-
-
-to{
-
-    opacity:1;
-
-}
-
-
-}
-
-
-
-
-
 
 /* =========================================
 REDUCE MOTION ACCESSIBILITY
 ========================================= */
-
-
-@media(prefers-reduced-motion:reduce){
-
-
-*{
-
-    animation:none!important;
-
-    transition:none!important;
-
-}
-
-
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
 }
