@@ -1,0 +1,958 @@
+/* =========================================
+BLACKWOOD FURNITURES
+PREMIUM SHOWROOM DESIGN SYSTEM
+========================================= */
+
+
+/* =========================================
+VARIABLES
+========================================= */
+
+:root {
+
+    --black:#121212;
+
+    --soft-black:#1a1a1a;
+
+    --gold:#c7a24f;
+
+    --gold-light:#e1c477;
+
+    --purple:#4a235a;
+
+    --white:#ffffff;
+
+    --cream:#f7f5f2;
+
+    --grey:#6d6d6d;
+
+    --border:#e8e3dc;
+
+
+    --heading-font:
+    'Playfair Display', serif;
+
+
+    --body-font:
+    'Inter', sans-serif;
+
+
+    --shadow:
+    0 20px 50px rgba(0,0,0,.12);
+
+
+    --transition:
+    all .35s ease;
+
+}
+
+
+
+
+
+
+
+/* =========================================
+RESET
+========================================= */
+
+
+* {
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+
+html {
+
+    scroll-behavior:smooth;
+
+}
+
+
+body {
+
+    font-family:var(--body-font);
+
+    color:var(--black);
+
+    background:var(--cream);
+
+    line-height:1.7;
+
+}
+
+
+img {
+
+    width:100%;
+
+    display:block;
+
+}
+
+
+a {
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+
+ul {
+
+    list-style:none;
+
+}
+
+
+
+
+.container {
+
+    width:min(1200px,90%);
+
+    margin:auto;
+
+}
+
+
+
+
+
+/* =========================================
+TYPOGRAPHY
+========================================= */
+
+
+h1,
+h2,
+h3 {
+
+    font-family:var(--heading-font);
+
+    line-height:1.2;
+
+}
+
+
+h1 {
+
+    font-size:clamp(3rem,6vw,5.5rem);
+
+}
+
+
+h2 {
+
+    font-size:clamp(2rem,4vw,3.5rem);
+
+}
+
+
+h3 {
+
+    font-size:1.5rem;
+
+}
+
+
+
+
+.section-tag {
+
+    color:var(--gold);
+
+    text-transform:uppercase;
+
+    letter-spacing:3px;
+
+    font-size:.85rem;
+
+    font-weight:600;
+
+    margin-bottom:20px;
+
+}
+
+
+
+
+
+/* =========================================
+HEADER
+========================================= */
+
+
+.header {
+
+    position:absolute;
+
+    width:100%;
+
+    top:0;
+
+    z-index:999;
+
+    padding:30px 0;
+
+}
+
+
+
+.transparent-header {
+
+    background:transparent;
+
+}
+
+
+
+.header-container {
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+
+
+.logo {
+
+    color:white;
+
+}
+
+
+
+.logo-main {
+
+    display:block;
+
+    font-family:var(--heading-font);
+
+    font-size:2rem;
+
+    font-weight:700;
+
+}
+
+
+
+.logo-sub {
+
+    color:var(--gold);
+
+    letter-spacing:3px;
+
+    font-size:.75rem;
+
+    text-transform:uppercase;
+
+}
+
+
+
+
+
+.navigation {
+
+    display:flex;
+
+    align-items:center;
+
+    gap:40px;
+
+}
+
+
+
+.nav-links {
+
+    display:flex;
+
+    gap:30px;
+
+}
+
+
+
+.nav-links a {
+
+    color:white;
+
+    font-size:.95rem;
+
+    position:relative;
+
+}
+
+
+
+.nav-links a::after {
+
+    content:"";
+
+    position:absolute;
+
+    bottom:-8px;
+
+    left:0;
+
+    width:0;
+
+    height:2px;
+
+    background:var(--gold);
+
+    transition:.3s;
+
+}
+
+
+
+.nav-links a:hover::after {
+
+    width:100%;
+
+}
+
+
+
+
+
+
+
+/* =========================================
+BUTTONS
+========================================= */
+
+
+.btn {
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:15px 35px;
+
+    border-radius:0;
+
+    font-weight:600;
+
+    transition:var(--transition);
+
+}
+
+
+
+.btn-gold {
+
+    background:var(--gold);
+
+    color:var(--black);
+
+}
+
+
+
+.btn-gold:hover {
+
+    background:var(--gold-light);
+
+    transform:translateY(-3px);
+
+}
+
+
+
+.btn-outline-light {
+
+    border:1px solid white;
+
+    color:white;
+
+}
+
+
+
+.btn-outline-light:hover {
+
+    background:white;
+
+    color:var(--black);
+
+}
+
+
+
+
+
+.btn-dark {
+
+    background:var(--black);
+
+    color:white;
+
+}
+
+
+
+
+
+
+
+
+/* =========================================
+HERO
+========================================= */
+
+
+.luxury-hero {
+
+    min-height:100vh;
+
+    background:
+
+    url("../images/hero-living-room.jpg")
+
+    center/cover no-repeat;
+
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+
+
+.hero-overlay {
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    linear-gradient(
+
+    90deg,
+
+    rgba(0,0,0,.75),
+
+    rgba(0,0,0,.35)
+
+    );
+
+}
+
+
+
+.hero-content {
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+
+.hero-text {
+
+    max-width:800px;
+
+    color:white;
+
+}
+
+
+
+.hero-tag {
+
+    color:var(--gold);
+
+    letter-spacing:4px;
+
+    font-weight:600;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.hero-description {
+
+    font-size:1.15rem;
+
+    max-width:650px;
+
+    margin:30px 0;
+
+}
+
+
+
+.hero-buttons {
+
+    display:flex;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+
+
+.hero-trust {
+
+    margin-top:50px;
+
+    opacity:.9;
+
+}
+
+
+
+
+
+
+
+/* =========================================
+TRUST STATISTICS
+========================================= */
+
+
+.floating-trust {
+
+    margin-top:-80px;
+
+    position:relative;
+
+    z-index:10;
+
+}
+
+
+
+.trust-wrapper {
+
+    background:white;
+
+    box-shadow:var(--shadow);
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+}
+
+
+
+.trust-box {
+
+    padding:35px;
+
+    text-align:center;
+
+    border-right:1px solid var(--border);
+
+}
+
+
+
+.trust-box h2 {
+
+    color:var(--gold);
+
+}
+
+
+
+
+
+/* =========================================
+SECTION HEADERS
+========================================= */
+
+
+.section-header {
+
+    max-width:800px;
+
+    margin:auto;
+
+    text-align:center;
+
+    margin-bottom:70px;
+
+}
+
+
+
+.section-header p {
+
+    color:var(--grey);
+
+}
+
+
+
+
+
+
+
+
+/* =========================================
+INTRO
+========================================= */
+
+
+.intro-section {
+
+    padding:120px 0;
+
+}
+
+
+
+
+
+
+
+/* =========================================
+CRAFT SECTION
+========================================= */
+
+
+.craft-section {
+
+    padding:120px 0;
+
+}
+
+
+
+.craft-grid {
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:80px;
+
+    align-items:center;
+
+}
+
+
+
+.craft-image img {
+
+    height:650px;
+
+    object-fit:cover;
+
+}
+
+
+
+.craft-features {
+
+    margin:40px 0;
+
+}
+
+
+
+.craft-features div {
+
+    margin-bottom:25px;
+
+}
+
+
+
+.craft-features span {
+
+    color:var(--gold);
+
+    font-weight:700;
+
+}
+
+
+
+
+
+
+
+/* =========================================
+CATEGORY CARDS
+========================================= */
+
+
+.category-grid {
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:30px;
+
+}
+
+
+
+.category-card {
+
+    position:relative;
+
+    height:500px;
+
+    overflow:hidden;
+
+}
+
+
+
+.category-card img {
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.6s;
+
+}
+
+
+
+.category-card:hover img {
+
+    transform:scale(1.08);
+
+}
+
+
+
+.category-overlay {
+
+    position:absolute;
+
+    bottom:0;
+
+    padding:40px;
+
+    color:white;
+
+    background:
+
+    linear-gradient(
+
+    transparent,
+
+    rgba(0,0,0,.8)
+
+    );
+
+    width:100%;
+
+}
+
+
+
+
+
+
+
+/* =========================================
+DARK SECTION
+========================================= */
+
+
+.dark-section {
+
+    background:var(--black);
+
+    color:white;
+
+    padding:120px 0;
+
+    text-align:center;
+
+}
+
+
+
+.gold-text {
+
+    color:var(--gold);
+
+}
+
+
+
+
+
+
+
+/* =========================================
+PREMIUM CTA
+========================================= */
+
+
+.premium-cta {
+
+    min-height:600px;
+
+    background:
+
+    url("../images/final-cta.jpg")
+
+    center/cover;
+
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    text-align:center;
+
+    color:white;
+
+}
+
+
+
+.cta-overlay {
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,.65);
+
+}
+
+
+
+.cta-content {
+
+    position:relative;
+
+    z-index:2;
+
+    max-width:800px;
+
+    margin:auto;
+
+}
+
+
+
+.cta-buttons {
+
+    margin-top:40px;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+}
+
+
+
+
+
+
+
+
+/* =========================================
+FOOTER
+========================================= */
+
+
+.footer {
+
+    background:#0b0b0b;
+
+    color:white;
+
+    padding:70px 0;
+
+}
+
+
+
+.footer-grid {
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:40px;
+
+}
+
+
+
+.footer h4 {
+
+    color:var(--gold);
+
+}
+
+
+
+
+
+
+
+/* WHATSAPP */
+
+.whatsapp-button {
+
+    position:fixed;
+
+    right:25px;
+
+    bottom:25px;
+
+    background:#25D366;
+
+    color:white;
+
+    padding:16px 25px;
+
+    border-radius:50px;
+
+    z-index:1000;
+
+    font-weight:600;
+
+    box-shadow:var(--shadow);
+
+}
+

@@ -1,0 +1,561 @@
+/* =========================================
+BLACKWOOD FURNITURES
+PREMIUM RESPONSIVE SYSTEM
+========================================= */
+
+
+/* =========================================
+LARGE SCREENS
+========================================= */
+
+@media (min-width:1400px){
+
+.container{
+
+    width:1200px;
+
+}
+
+
+.hero-description{
+
+    font-size:1.25rem;
+
+}
+
+
+}
+
+
+
+/* =========================================
+TABLETS
+========================================= */
+
+@media (max-width:1024px){
+
+
+
+/* HEADER */
+
+.navigation{
+
+    gap:20px;
+
+}
+
+
+.nav-links{
+
+    gap:18px;
+
+}
+
+
+.nav-links a{
+
+    font-size:.85rem;
+
+}
+
+
+
+
+/* HERO */
+
+.hero-text{
+
+    max-width:650px;
+
+}
+
+
+
+.hero-description{
+
+    font-size:1rem;
+
+}
+
+
+
+
+
+/* TRUST BAR */
+
+
+.trust-wrapper{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+
+
+.trust-box{
+
+    border-bottom:1px solid var(--border);
+
+}
+
+
+
+
+
+/* CRAFT SECTION */
+
+
+.craft-grid{
+
+    gap:40px;
+
+}
+
+
+
+.craft-image img{
+
+    height:500px;
+
+}
+
+
+
+
+/* CATEGORY */
+
+
+.category-grid{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+
+
+.category-card{
+
+    height:420px;
+
+}
+
+
+
+
+/* FOOTER */
+
+
+.footer-grid{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+
+
+}
+
+
+
+
+
+/* =========================================
+MOBILE DEVICES
+========================================= */
+
+@media (max-width:768px){
+
+
+
+.container{
+
+    width:92%;
+
+}
+
+
+
+
+
+/* HEADER */
+
+
+.header{
+
+    padding:20px 0;
+
+}
+
+
+
+.logo-main{
+
+    font-size:1.6rem;
+
+}
+
+
+
+.mobile-menu-btn{
+
+    display:block;
+
+    background:none;
+
+    border:none;
+
+    color:white;
+
+    font-size:28px;
+
+}
+
+
+
+.navigation{
+
+    position:absolute;
+
+    top:80px;
+
+    left:0;
+
+    width:100%;
+
+    background:#111;
+
+    padding:30px;
+
+    display:none;
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+}
+
+
+
+.navigation.active{
+
+    display:flex;
+
+}
+
+
+
+.nav-links{
+
+    flex-direction:column;
+
+    width:100%;
+
+}
+
+
+
+.nav-links a{
+
+    display:block;
+
+    padding:12px 0;
+
+}
+
+
+
+
+
+/* HERO */
+
+
+.luxury-hero{
+
+    min-height:90vh;
+
+}
+
+
+
+.hero-text{
+
+    text-align:left;
+
+}
+
+
+
+.hero h1{
+
+    font-size:2.8rem;
+
+}
+
+
+
+.hero-description{
+
+    font-size:1rem;
+
+}
+
+
+
+.hero-buttons{
+
+    flex-direction:column;
+
+    align-items:stretch;
+
+}
+
+
+
+.btn{
+
+    width:100%;
+
+}
+
+
+
+
+
+.hero-trust{
+
+    font-size:.85rem;
+
+}
+
+
+
+
+
+
+/* TRUST STATS */
+
+
+.floating-trust{
+
+    margin-top:-30px;
+
+}
+
+
+
+.trust-wrapper{
+
+    grid-template-columns:1fr;
+
+}
+
+
+
+.trust-box{
+
+    padding:25px;
+
+}
+
+
+
+
+
+
+/* SECTIONS */
+
+
+.intro-section,
+.craft-section,
+.categories-section,
+.featured-section,
+.dark-section{
+
+    padding:70px 0;
+
+}
+
+
+
+.section-header{
+
+    margin-bottom:45px;
+
+}
+
+
+
+.section-header h2{
+
+    font-size:2rem;
+
+}
+
+
+
+
+
+
+
+/* CRAFT */
+
+
+.craft-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+
+
+.craft-image img{
+
+    height:400px;
+
+}
+
+
+
+
+
+
+
+/* CATEGORY CARDS */
+
+
+.category-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+
+
+.category-card{
+
+    height:450px;
+
+}
+
+
+
+
+
+
+
+/* CTA */
+
+
+.cta-buttons{
+
+    flex-direction:column;
+
+}
+
+
+
+.premium-cta{
+
+    min-height:500px;
+
+}
+
+
+
+
+
+/* FOOTER */
+
+
+.footer-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+
+
+.footer{
+
+    text-align:center;
+
+}
+
+
+
+
+
+/* WHATSAPP */
+
+
+.whatsapp-button{
+
+    right:15px;
+
+    bottom:15px;
+
+    padding:14px 18px;
+
+    font-size:.85rem;
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+/* =========================================
+SMALL PHONES
+========================================= */
+
+@media(max-width:400px){
+
+
+.hero h1{
+
+    font-size:2.3rem;
+
+}
+
+
+
+.logo-main{
+
+    font-size:1.4rem;
+
+}
+
+
+
+.category-card{
+
+    height:380px;
+
+}
+
+
+
+.whatsapp-button{
+
+    width:55px;
+
+    height:55px;
+
+    overflow:hidden;
+
+    padding:18px;
+
+    border-radius:50%;
+
+    font-size:0;
+
+}
+
+
+}
