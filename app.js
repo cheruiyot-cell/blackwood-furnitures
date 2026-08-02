@@ -1,16 +1,12 @@
 /* =========================================
-BLACKWOOD FURNITURES
-PREMIUM FRONTEND JAVASCRIPT
+BLACKWOOD FURNITURES – FRONTEND JAVASCRIPT
 ========================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* =========================================
-    MOBILE MENU
-    ========================================= */
+    /* Mobile menu */
     const menuButton = document.querySelector(".mobile-menu-btn");
     const navigation = document.querySelector(".navigation");
-
     if (menuButton && navigation) {
         menuButton.addEventListener("click", () => {
             navigation.classList.toggle("active");
@@ -18,11 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    /* =========================================
-    STICKY HEADER
-    ========================================= */
+    /* Sticky header */
     const header = document.querySelector(".header");
-
     if (header) {
         window.addEventListener("scroll", () => {
             if (window.scrollY > 80) {
@@ -33,11 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    /* =========================================
-    SCROLL REVEAL ANIMATION
-    ========================================= */
+    /* Scroll reveal */
     const revealElements = document.querySelectorAll(".reveal");
-
     if (revealElements.length) {
         const revealObserver = new IntersectionObserver(
             (entries) => {
@@ -48,22 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 });
             },
-            {
-                threshold: 0.15,
-                rootMargin: "0px 0px -50px 0px" // Improves performance
-            }
+            { threshold: 0.15, rootMargin: "0px 0px -50px 0px" }
         );
-
-        revealElements.forEach((element) => {
-            revealObserver.observe(element);
-        });
+        revealElements.forEach((el) => revealObserver.observe(el));
     }
 
-    /* =========================================
-    ANIMATED STATISTICS (COUNTERS)
-    ========================================= */
+    /* Animated counters */
     const counters = document.querySelectorAll(".trust-box h2");
-
     if (counters.length) {
         const counterObserver = new IntersectionObserver(
             (entries) => {
@@ -74,28 +55,21 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 });
             },
-            {
-                threshold: 0.5
-            }
+            { threshold: 0.5 }
         );
-
-        counters.forEach((counter) => {
-            counterObserver.observe(counter);
-        });
+        counters.forEach((c) => counterObserver.observe(c));
     }
 
     function animateCounter(element) {
         const text = element.innerText;
-        const number = parseInt(text.replace(/\D/g, ""), 10) || 0; // Fallback to 0
+        const number = parseInt(text.replace(/\D/g, ""), 10) || 0;
         const suffix = text.replace(/[0-9]/g, "");
-
         if (number === 0) {
             element.innerText = "0" + suffix;
             return;
         }
-
         let current = 0;
-        const increment = number / 80; // Speed control
+        const increment = number / 80;
         const timer = setInterval(() => {
             current += increment;
             if (current >= number) {
@@ -107,71 +81,52 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 20);
     }
 
-    /* =========================================
-    SMOOTH INTERNAL LINKS (SCROLL TO ANCHOR)
-    ========================================= */
+    /* Smooth internal links */
     document.querySelectorAll('a[href^="#"]').forEach((link) => {
         link.addEventListener("click", (e) => {
             const targetId = link.getAttribute("href");
-            if (targetId === "#" || targetId === "") return; // Skip empty anchors
-
+            if (targetId === "#" || targetId === "") return;
             const target = document.querySelector(targetId);
             if (target) {
                 e.preventDefault();
-                target.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
             }
         });
     });
 
-    /* =========================================
-    IMAGE LAZY LOADING
-    ========================================= */
-    document.querySelectorAll("img").forEach((image) => {
-        if (!image.hasAttribute("loading")) {
-            image.setAttribute("loading", "lazy");
+    /* Image lazy loading */
+    document.querySelectorAll("img").forEach((img) => {
+        if (!img.hasAttribute("loading")) {
+            img.setAttribute("loading", "lazy");
         }
     });
 
-    /* =========================================
-    WHATSAPP PERSONALIZATION (Tracking)
-    ========================================= */
-    document.querySelectorAll(".whatsapp-button").forEach((button) => {
-        button.addEventListener("click", () => {
-            // Optional: send analytics event
+    /* WhatsApp tracking */
+    document.querySelectorAll(".whatsapp-button").forEach((btn) => {
+        btn.addEventListener("click", () => {
             if (typeof gtag === "function") {
                 gtag("event", "whatsapp_click");
             }
         });
     });
 
-    /* =========================================
-    QUOTE FORM VALIDATION
-    ========================================= */
+    /* Form validation */
     document.querySelectorAll("form").forEach((form) => {
         form.addEventListener("submit", (event) => {
-            const requiredFields = form.querySelectorAll("[required]");
+            const required = form.querySelectorAll("[required]");
             let valid = true;
-
-            requiredFields.forEach((field) => {
-                // Clear previous error styling
+            required.forEach((field) => {
                 field.style.borderColor = "";
-
                 if (!field.value.trim()) {
                     valid = false;
-                    field.style.borderColor = "#c7a24f"; // Gold error indicator
+                    field.style.borderColor = "#c7a24f";
                 }
             });
-
             if (!valid) {
                 event.preventDefault();
                 alert("Please complete all required fields before submitting.");
             }
         });
-
-        // Optional: clear error border on input
         form.querySelectorAll("[required]").forEach((field) => {
             field.addEventListener("input", () => {
                 field.style.borderColor = "";
@@ -179,15 +134,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    /* =========================================
-    ACTIVE NAVIGATION (Highlight Current Page)
-    ========================================= */
+    /* Active navigation highlight */
     const currentPath = window.location.pathname;
-
     document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.classList.remove("active");
         const linkPath = new URL(link.href).pathname;
-        // Exact match, or match index.html as root
-        if (linkPath === currentPath || 
+        if (linkPath === currentPath ||
             (currentPath === "/" && linkPath.endsWith("index.html"))) {
             link.classList.add("active");
         }

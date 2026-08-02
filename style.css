@@ -1,6 +1,6 @@
 /* =========================================
 BLACKWOOD FURNITURES
-PREMIUM SHOWROOM DESIGN SYSTEM
+MASTER STYLESHEET
 ========================================= */
 
 /* =========================================
@@ -11,7 +11,6 @@ VARIABLES
     --soft-black: #1a1a1a;
     --gold: #c7a24f;
     --gold-light: #e1c477;
-    --purple: #4a235a;
     --white: #ffffff;
     --cream: #f7f5f2;
     --grey: #6d6d6d;
@@ -25,7 +24,7 @@ VARIABLES
 }
 
 /* =========================================
-RESET
+RESET & BASE
 ========================================= */
 * {
     margin: 0;
@@ -53,6 +52,7 @@ img {
 a {
     text-decoration: none;
     color: inherit;
+    transition: var(--transition);
 }
 
 ul {
@@ -67,9 +67,7 @@ ul {
 /* =========================================
 TYPOGRAPHY
 ========================================= */
-h1,
-h2,
-h3 {
+h1, h2, h3 {
     font-family: var(--heading-font);
     line-height: 1.2;
 }
@@ -95,6 +93,10 @@ h3 {
     margin-bottom: 20px;
 }
 
+.gold-text {
+    color: var(--gold);
+}
+
 /* =========================================
 BUTTONS
 ========================================= */
@@ -108,6 +110,27 @@ BUTTONS
     transition: var(--transition);
     cursor: pointer;
     border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.18);
+    transition: left 0.5s ease;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
 }
 
 .btn-gold {
@@ -117,7 +140,6 @@ BUTTONS
 
 .btn-gold:hover {
     background: var(--gold-light);
-    transform: translateY(-3px);
 }
 
 .btn-outline-light {
@@ -203,11 +225,28 @@ HEADER
     width: 0;
     height: 2px;
     background: var(--gold);
-    transition: var(--transition);
+    transition: width 0.4s ease;
 }
 
-.nav-links a:hover::after {
+.nav-links a:hover::after,
+.nav-links a.active::after {
     width: 100%;
+}
+
+.header.scrolled {
+    background: rgba(18, 18, 18, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 18px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
 }
 
 /* =========================================
@@ -215,7 +254,7 @@ HERO
 ========================================= */
 .luxury-hero {
     min-height: 100vh;
-    background: url("../images/hero-living-room.jpg") center/cover no-repeat;
+    background: url('https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
     position: relative;
     display: flex;
     align-items: center;
@@ -271,7 +310,7 @@ HERO
 }
 
 /* =========================================
-FLOATING TRUST BAR
+TRUST BAR
 ========================================= */
 .floating-trust {
     margin-top: -80px;
@@ -298,10 +337,22 @@ FLOATING TRUST BAR
 
 .trust-box h2 {
     color: var(--gold);
+    animation: numberPulse 3s infinite;
+}
+
+@keyframes numberPulse {
+    0%   { opacity: 0.8; }
+    50%  { opacity: 1; }
+    100% { opacity: 0.8; }
+}
+
+.trust-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
 }
 
 /* =========================================
-SECTION HEADERS
+SECTION HEADERS (common)
 ========================================= */
 .section-header {
     max-width: 800px;
@@ -314,7 +365,7 @@ SECTION HEADERS
 }
 
 /* =========================================
-INTRO SECTION
+INTRODUCTION
 ========================================= */
 .intro-section {
     padding: 120px 0;
@@ -370,7 +421,7 @@ CATEGORY CARDS
 .category-card img {
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
+    transition: transform 0.8s ease;
 }
 
 .category-card:hover img {
@@ -385,6 +436,11 @@ CATEGORY CARDS
     padding: 40px;
     color: var(--white);
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    transition: transform 0.5s ease;
+}
+
+.category-card:hover .category-overlay {
+    transform: translateY(-15px);
 }
 
 /* =========================================
@@ -409,6 +465,7 @@ FEATURED SECTION
 .featured-small img {
     height: 100%;
     object-fit: cover;
+    transition: transform 0.8s ease;
 }
 
 .featured-content {
@@ -434,6 +491,10 @@ FEATURED SECTION
     z-index: 1;
 }
 
+.featured-small:hover img {
+    transform: scale(1.08);
+}
+
 /* =========================================
 DARK SECTION (CRAFTSMANSHIP)
 ========================================= */
@@ -442,10 +503,6 @@ DARK SECTION (CRAFTSMANSHIP)
     color: var(--white);
     padding: 120px 0;
     text-align: center;
-}
-
-.gold-text {
-    color: var(--gold);
 }
 
 /* =========================================
@@ -475,7 +532,7 @@ LIFESTYLE GALLERY
 .gallery-item img {
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
+    transition: transform 0.8s ease;
 }
 
 .gallery-item:hover img {
@@ -490,6 +547,14 @@ LIFESTYLE GALLERY
     padding: 25px;
     color: var(--white);
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.gallery-item:hover .gallery-caption {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* =========================================
@@ -529,13 +594,24 @@ PROCESS SECTION
 
 .process-step {
     text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.process-step:hover {
+    transform: translateY(-10px);
 }
 
 .process-step span {
-    display: inline-block;
-    font-size: 3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--black);
     font-weight: 700;
-    color: var(--gold);
+    font-size: 1.5rem;
     margin-bottom: 15px;
 }
 
@@ -572,11 +648,192 @@ TESTIMONIALS
 }
 
 /* =========================================
+PAGE SECTIONS (About, Collections, Custom, Portfolio, Contact, Quote)
+========================================= */
+.page-section {
+    padding: 100px 0;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+.page-section .container {
+    width: 100%;
+}
+
+.page-section h1 {
+    margin-bottom: 20px;
+}
+
+.page-section p {
+    max-width: 700px;
+    margin: 0 auto 20px;
+}
+
+.page-section .btn {
+    margin-top: 10px;
+}
+
+/* =========================================
+COLLECTIONS GRID (inside #collections)
+========================================= */
+.collections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.collections-grid > div {
+    background: var(--cream);
+    padding: 40px 30px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.collections-grid > div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.collections-grid h3 {
+    color: var(--gold);
+    font-size: 1.5rem;
+}
+
+.collections-grid p {
+    margin: 15px 0;
+}
+
+.collections-grid a {
+    color: var(--gold);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* =========================================
+PORTFOLIO GRID
+========================================= */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.portfolio-item {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.portfolio-item h3 {
+    color: var(--gold);
+    margin-bottom: 10px;
+}
+
+.portfolio-item p {
+    margin: 0;
+}
+
+/* =========================================
+CONTACT DETAILS
+========================================= */
+.contact-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-details div {
+    background: var(--white);
+    padding: 30px 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+    text-align: center;
+}
+
+.contact-details div h4 {
+    color: var(--gold);
+    margin-bottom: 10px;
+}
+
+.contact-details div p {
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+/* =========================================
+QUOTE FORM
+========================================= */
+.quote-form {
+    max-width: 600px;
+    margin: 40px auto 0;
+    background: var(--cream);
+    padding: 40px;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.quote-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--black);
+}
+
+.quote-form input,
+.quote-form textarea,
+.quote-form select {
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: var(--body-font);
+    font-size: 1rem;
+    background: var(--white);
+    transition: border-color 0.3s ease;
+}
+
+.quote-form input:focus,
+.quote-form textarea:focus,
+.quote-form select:focus {
+    border-color: var(--gold);
+    outline: none;
+}
+
+.quote-form .btn {
+    width: 100%;
+    padding: 16px;
+}
+
+.quote-form p {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: #999;
+}
+
+/* =========================================
 PREMIUM CTA
 ========================================= */
 .premium-cta {
     min-height: 600px;
-    background: url("../images/final-cta.jpg") center/cover no-repeat;
+    background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
     position: relative;
     display: flex;
     align-items: center;
@@ -661,136 +918,180 @@ WHATSAPP FLOATING BUTTON
     font-weight: 600;
     box-shadow: var(--shadow);
     transition: var(--transition);
+    animation: whatsappPulse 2.5s infinite;
 }
 
 .whatsapp-button:hover {
     transform: scale(1.05);
 }
 
+@keyframes whatsappPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+    70%  { box-shadow: 0 0 0 18px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* =========================================
+ANIMATIONS (Reveal, FadeUp, Page Load)
+========================================= */
+.fade-up {
+    animation: fadeUp 1.2s ease forwards;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-tag {
+    animation: fadeUp 0.8s ease forwards;
+}
+
+.hero-text h1 {
+    animation: fadeUp 1s ease 0.2s forwards;
+    opacity: 0;
+}
+
+.hero-description {
+    animation: fadeUp 1s ease 0.4s forwards;
+    opacity: 0;
+}
+
+.hero-buttons {
+    animation: fadeUp 1s ease 0.6s forwards;
+    opacity: 0;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+body {
+    animation: pageLoad 0.7s ease;
+}
+
+@keyframes pageLoad {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* =========================================
+REDUCE MOTION ACCESSIBILITY
+========================================= */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
 /* =========================================
 RESPONSIVE BREAKPOINTS
 ========================================= */
 @media (max-width: 1024px) {
-    .featured-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .featured-main {
-        grid-row: span 1;
-    }
-
-    .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .gallery-item.large {
-        grid-row: span 1;
-    }
+    .navigation { gap: 20px; }
+    .nav-links { gap: 18px; }
+    .nav-links a { font-size: 0.85rem; }
+    .hero-text { max-width: 650px; }
+    .hero-description { font-size: 1rem; }
+    .trust-wrapper { grid-template-columns: repeat(2, 1fr); }
+    .trust-box { border-bottom: 1px solid var(--border); }
+    .craft-grid { gap: 40px; }
+    .craft-image img { height: 500px; }
+    .category-grid { grid-template-columns: repeat(2, 1fr); }
+    .category-card { height: 420px; }
+    .footer-seo { grid-template-columns: repeat(2, 1fr); }
+    .featured-grid { grid-template-columns: 1fr 1fr; }
+    .featured-main { grid-row: span 1; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-item.large { grid-row: span 1; }
 }
 
 @media (max-width: 768px) {
-    .header-container {
-        flex-wrap: wrap;
-    }
-
+    .container { width: 92%; }
+    .header { padding: 20px 0; }
+    .logo-main { font-size: 1.6rem; }
+    .mobile-menu-btn { display: block; }
     .navigation {
-        order: 3;
+        position: absolute;
+        top: 80px;
+        left: 0;
         width: 100%;
-        justify-content: space-between;
-        margin-top: 20px;
-        gap: 20px;
-    }
-
-    .nav-links {
-        gap: 15px;
-        flex-wrap: wrap;
-    }
-
-    .trust-wrapper {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .trust-box:nth-child(2) {
-        border-right: none;
-    }
-
-    .craft-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
-    .craft-image img {
-        height: 300px;
-    }
-
-    .category-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .category-card {
-        height: 350px;
-    }
-
-    .featured-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .experience-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .process-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .testimonial-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .gallery-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .footer-seo {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
-    .footer-seo ul {
-        align-items: center;
-    }
-
-    .cta-buttons {
+        background: #111;
+        padding: 30px;
+        display: none;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
     }
+    .navigation.active { display: flex; }
+    .nav-links { flex-direction: column; width: 100%; }
+    .nav-links a { display: block; padding: 12px 0; }
+    .luxury-hero { min-height: 90vh; }
+    .hero-text { text-align: left; }
+    .hero-text h1 { font-size: 2.8rem; }
+    .hero-description { font-size: 1rem; }
+    .hero-buttons { flex-direction: column; align-items: stretch; }
+    .btn { width: 100%; }
+    .hero-trust { font-size: 0.85rem; }
+    .floating-trust { margin-top: -30px; }
+    .trust-wrapper { grid-template-columns: 1fr; }
+    .trust-box { padding: 25px; border-right: none; }
+    .intro-section,
+    .craft-section,
+    .categories-section,
+    .featured-section,
+    .dark-section,
+    .gallery-section,
+    .experience-section,
+    .process-section,
+    .testimonial-section,
+    .page-section {
+        padding: 70px 0;
+    }
+    .section-header { margin-bottom: 45px; }
+    .section-header h2 { font-size: 2rem; }
+    .craft-grid { grid-template-columns: 1fr; }
+    .craft-image img { height: 400px; }
+    .category-grid { grid-template-columns: 1fr; }
+    .category-card { height: 450px; }
+    .featured-grid { grid-template-columns: 1fr; }
+    .featured-main { grid-row: span 1; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-item.large { grid-row: span 1; }
+    .process-grid { grid-template-columns: 1fr 1fr; }
+    .testimonial-grid { grid-template-columns: 1fr; }
+    .experience-grid { grid-template-columns: 1fr; }
+    .cta-buttons { flex-direction: column; align-items: center; }
+    .premium-cta { min-height: 500px; }
+    .footer-seo { grid-template-columns: 1fr; text-align: center; }
+    .footer-seo ul { align-items: center; }
+    .whatsapp-button { right: 15px; bottom: 15px; padding: 14px 18px; font-size: 0.85rem; }
+    .collections-grid { grid-template-columns: 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .contact-details { grid-template-columns: 1fr; }
+    .quote-form { padding: 25px; }
+}
 
+@media (max-width: 400px) {
+    .hero-text h1 { font-size: 2.3rem; }
+    .logo-main { font-size: 1.4rem; }
+    .category-card { height: 380px; }
     .whatsapp-button {
-        padding: 12px 20px;
-        font-size: 0.9rem;
+        width: 55px;
+        height: 55px;
+        overflow: hidden;
+        padding: 18px;
+        border-radius: 50%;
+        font-size: 0;
     }
 }
 
-@media (max-width: 480px) {
-    .trust-wrapper {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .trust-box {
-        padding: 20px;
-        border-right: none;
-    }
-
-    .trust-box:nth-child(odd) {
-        border-right: 1px solid var(--border);
-    }
-
-    .process-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .hero-buttons .btn {
-        width: 100%;
-        justify-content: center;
-    }
+@media (min-width: 769px) {
+    .mobile-menu-btn { display: none !important; }
 }
