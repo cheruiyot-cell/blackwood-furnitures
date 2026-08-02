@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     /* =========================================
-    QUOTE FORM – MAILTO SUBMISSION
+    QUOTE FORM – MAILTO SUBMISSION (IMPROVED)
     ========================================= */
     const quoteForm = document.getElementById('quoteForm');
     if (quoteForm) {
@@ -188,8 +188,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const project = document.getElementById('quote-type').value;
             const message = document.getElementById('quote-message').value.trim();
 
+            // Basic validation
             if (!name || !email || !project || !message) {
                 alert('Please fill in all required fields.');
+                return;
+            }
+            if (!email.includes('@') || !email.includes('.')) {
+                alert('Please enter a valid email address.');
                 return;
             }
 
@@ -205,10 +210,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
 
-            // ✅ Confirmation alert + reset
-            alert('Your email client has been opened. Please send the email to complete your request.');
-            window.location.href = mailtoLink;
+            // Reset the form first (so it always clears, even if email fails)
             quoteForm.reset();
+
+            // Try to open the mail client in a new window/tab
+            const opened = window.open(mailtoLink, '_blank');
+
+            // Fallback if window.open was blocked or failed
+            if (!opened || opened.closed || typeof opened.closed === 'undefined') {
+                alert(
+                    'We could not open your email client automatically.\n' +
+                    'Please copy this address and send your message manually:\n\n' +
+                    `To: ${recipient}\n` +
+                    `Subject: ${decodeURIComponent(subject)}\n\n` +
+                    `Body:\n${decodeURIComponent(body)}`
+                );
+            } else {
+                alert('Your email client has been opened. Please send the email to complete your request.');
+            }
         });
     }
 
