@@ -236,18 +236,61 @@ HEADER
 .header.scrolled {
     background: rgba(18, 18, 18, 0.95);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    -webkit-backdrop-filter: blur(10px);
     padding: 18px 0;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
+/* =========================================
+MOBILE MENU HAMBURGER
+========================================= */
 .mobile-menu-btn {
     display: none;
     background: none;
     border: none;
     color: white;
-    font-size: 28px;
     cursor: pointer;
+    width: 30px;
+    height: 24px;
+    position: relative;
+    padding: 0;
+}
+
+.mobile-menu-btn .hamburger,
+.mobile-menu-btn .hamburger::before,
+.mobile-menu-btn .hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--white);
+    transition: var(--transition);
+}
+
+.mobile-menu-btn .hamburger {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.mobile-menu-btn .hamburger::before {
+    top: -8px;
+}
+
+.mobile-menu-btn .hamburger::after {
+    bottom: -8px;
+}
+
+.mobile-menu-btn.open .hamburger {
+    background: transparent;
+}
+
+.mobile-menu-btn.open .hamburger::before {
+    transform: rotate(45deg) translate(5px, 6px);
+}
+
+.mobile-menu-btn.open .hamburger::after {
+    transform: rotate(-45deg) translate(5px, -6px);
 }
 
 /* =========================================
@@ -779,7 +822,7 @@ CONTACT DETAILS
 }
 
 /* =========================================
-QUOTE FORM
+QUOTE FORM (Formspree)
 ========================================= */
 .quote-form {
     max-width: 600px;
@@ -830,6 +873,15 @@ QUOTE FORM
     color: #999;
 }
 
+.quote-form .form-success {
+    color: #4CAF50;
+    font-weight: 600;
+}
+.quote-form .form-error {
+    color: #f44336;
+    font-weight: 600;
+}
+
 /* =========================================
 PREMIUM CTA
 ========================================= */
@@ -870,39 +922,81 @@ FOOTER
 footer {
     background: #0b0b0b;
     color: var(--white);
-    padding: 70px 0;
+    padding: 50px 0 0;
 }
 
-.footer-seo {
+.footer-grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     gap: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    padding-bottom: 30px;
 }
 
-.footer-seo h3 {
-    color: var(--gold);
-}
-
-.footer-seo h4 {
+.footer-brand h3 {
     color: var(--gold);
     margin-bottom: 15px;
 }
 
-.footer-seo ul {
+.footer-brand p {
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
+.footer-social {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-social a {
+    display: inline-block;
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.2);
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.footer-social a:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--black);
+}
+
+.footer-links h4,
+.footer-contact h4 {
+    color: var(--gold);
+    margin-bottom: 15px;
+}
+
+.footer-links ul {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.footer-seo ul a:hover {
+.footer-links ul a:hover {
     color: var(--gold-light);
 }
 
-.footer-seo p {
+.footer-contact p {
     margin-bottom: 8px;
+    color: #ccc;
+}
+
+.footer-contact a {
+    color: var(--gold);
+    font-weight: 600;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 20px 0;
+    text-align: center;
+    color: #888;
+    font-size: 0.9rem;
 }
 
 /* =========================================
@@ -1009,7 +1103,7 @@ RESPONSIVE BREAKPOINTS
     .craft-image img { height: 500px; }
     .category-grid { grid-template-columns: repeat(2, 1fr); }
     .category-card { height: 420px; }
-    .footer-seo { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: repeat(2, 1fr); }
     .featured-grid { grid-template-columns: 1fr 1fr; }
     .featured-main { grid-row: span 1; }
     .gallery-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1023,7 +1117,7 @@ RESPONSIVE BREAKPOINTS
     .mobile-menu-btn { display: block; }
     .navigation {
         position: absolute;
-        top: 100%;            /* was 80px – now relative to header height */
+        top: 100%;
         left: 0;
         width: 100%;
         background: #111;
@@ -1072,8 +1166,9 @@ RESPONSIVE BREAKPOINTS
     .experience-grid { grid-template-columns: 1fr; }
     .cta-buttons { flex-direction: column; align-items: center; }
     .premium-cta { min-height: 500px; }
-    .footer-seo { grid-template-columns: 1fr; text-align: center; }
-    .footer-seo ul { align-items: center; }
+    .footer-grid { grid-template-columns: 1fr; text-align: center; }
+    .footer-links ul { align-items: center; }
+    .footer-social { justify-content: center; }
     .whatsapp-button { right: 15px; bottom: 15px; padding: 14px 18px; font-size: 0.85rem; }
     .collections-grid { grid-template-columns: 1fr; }
     .portfolio-grid { grid-template-columns: 1fr; }

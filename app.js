@@ -117,16 +117,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     /* =========================================
-    IMAGE LAZY LOADING
+    IMAGE LAZY LOADING (already set in HTML)
     ========================================= */
-    document.querySelectorAll("img").forEach((image) => {
-        if (!image.hasAttribute("loading")) {
-            image.setAttribute("loading", "lazy");
-        }
-    });
+    // No extra action needed – `loading="lazy"` is already on all images.
 
     /* =========================================
-    WHATSAPP PERSONALIZATION
+    WHATSAPP CLICK TRACKING
     ========================================= */
     document.querySelectorAll(".whatsapp-button").forEach((button) => {
         button.addEventListener("click", () => {
@@ -137,98 +133,86 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     /* =========================================
-    QUOTE FORM VALIDATION (for other forms)
+    ACTIVE NAVIGATION (hash‑based)
     ========================================= */
-    document.querySelectorAll("form:not(#quoteForm)").forEach((form) => {
-        form.addEventListener("submit", (event) => {
-            const requiredFields = form.querySelectorAll("[required]");
-            let valid = true;
-            requiredFields.forEach((field) => {
-                field.style.borderColor = "";
-                if (!field.value.trim()) {
-                    valid = false;
-                    field.style.borderColor = "#c7a24f";
-                }
-            });
-            if (!valid) {
-                event.preventDefault();
-                alert("Please complete all required fields before submitting.");
-            }
-        });
-        form.querySelectorAll("[required]").forEach((field) => {
-            field.addEventListener("input", () => {
-                field.style.borderColor = "";
-            });
-        });
-    });
-
-    /* =========================================
-    ACTIVE NAVIGATION
-    ========================================= */
-    const currentPath = window.location.pathname;
-    document.querySelectorAll(".nav-links a").forEach((link) => {
-        const linkPath = new URL(link.href).pathname;
-        if (linkPath === currentPath || 
-            (currentPath === "/" && linkPath.endsWith("index.html"))) {
-            link.classList.add("active");
-        }
-    });
-
-    /* =========================================
-    QUOTE FORM – MAILTO SUBMISSION (IMPROVED)
-    ========================================= */
-    const quoteForm = document.getElementById('quoteForm');
-    if (quoteForm) {
-        quoteForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const name = document.getElementById('quote-name').value.trim();
-            const email = document.getElementById('quote-email').value.trim();
-            const phone = document.getElementById('quote-phone').value.trim();
-            const project = document.getElementById('quote-type').value;
-            const message = document.getElementById('quote-message').value.trim();
-
-            // Basic validation
-            if (!name || !email || !project || !message) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            if (!email.includes('@') || !email.includes('.')) {
-                alert('Please enter a valid email address.');
-                return;
-            }
-
-            const recipient = 'harrisoncheruiyot04@gmail.com';
-            const subject = encodeURIComponent('New Furniture Quote Request from Blackwood Website');
-            const body = encodeURIComponent(
-                `Name: ${name}\n` +
-                `Email: ${email}\n` +
-                `Phone: ${phone || 'Not provided'}\n` +
-                `Project Type: ${project}\n` +
-                `Message:\n${message}`
-            );
-
-            const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
-
-            // Reset the form first (so it always clears, even if email fails)
-            quoteForm.reset();
-
-            // Try to open the mail client in a new window/tab
-            const opened = window.open(mailtoLink, '_blank');
-
-            // Fallback if window.open was blocked or failed
-            if (!opened || opened.closed || typeof opened.closed === 'undefined') {
-                alert(
-                    'We could not open your email client automatically.\n' +
-                    'Please copy this address and send your message manually:\n\n' +
-                    `To: ${recipient}\n` +
-                    `Subject: ${decodeURIComponent(subject)}\n\n` +
-                    `Body:\n${decodeURIComponent(body)}`
-                );
-            } else {
-                alert('Your email client has been opened. Please send the email to complete your request.');
+    const navLinks = document.querySelectorAll(".nav-links a");
+    function setActiveLink() {
+        const hash = window.location.hash;
+        navLinks.forEach((link) => {
+            link.classList.remove("active");
+            if (link.getAttribute("href") === hash) {
+                link.classList.add("active");
             }
         });
     }
+    window.addEventListener("hashchange", setActiveLink);
+    // Set initial active based on current hash (or default Home)
+    setActiveLink();
 
+    /* =========================================
+    QUOTE FORM – AJAX SUBMISSION VIA FORMSPREE
+    ========================================= */
+    const quoteForm = document.getElementById("quoteForm");
+    const formStatus = document.getElementById("formStatus");
+
+    if (quoteForm) {
+        quoteForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            // Basic client‑side validation (HTML `required` already covers most)
+            const name = document.getElementById("quote-name").value.trim();
+            const email = document.getElementById("quote-email").value.trim();
+            const project = document.getElementById("quote-type").value;
+            const message = document.getElementById("quote-message").value.trim();
+
+            if (!name || !email || !project || !message) {
+                formStatus.textContent = "Please fill in all required fields.";
+                formStatus.className = "form-error";
+                return;
+            }
+            if (!email.includes("@") || !email.includes(".")) {
+                formStatus.textContent = "Please enter a valid email address.";
+                formStatus.className = "form-error";
+                return;
+            }
+
+            // Prepare FormData
+            const formData = new FormData(quoteForm);
+
+            // Show sending status
+            const submitBtn = quoteForm.querySelector("button[type='submit']");
+            submitBtn.textContent = "Sending...";
+            submitBtn.disabled = true;
+            formStatus.textContent = "";
+            formStatus.className = "";
+
+            try {
+                const response = await fetch(quoteForm.action, {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                });
+
+                if (response.ok) {
+                    // Success
+                    formStatus.textContent = "Thank you! We'll get back to you within 24 hours.";
+                    formStatus.className = "form-success";
+                    quoteForm.reset();
+                } else {
+                    const data = await response.json();
+                    const errorMsg = data.error ? data.error : "Something went wrong. Please try again later.";
+                    formStatus.textContent = errorMsg;
+                    formStatus.className = "form-error";
+                }
+            } catch (error) {
+                formStatus.textContent = "Network error. Please check your connection and try again.";
+                formStatus.className = "form-error";
+            } finally {
+                submitBtn.textContent = "Send Request";
+                submitBtn.disabled = false;
+            }
+        });
+    }
 });
