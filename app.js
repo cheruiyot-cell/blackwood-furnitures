@@ -124,6 +124,24 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("hashchange", setActiveLink);
   setActiveLink();
 
+  // Back to Top Button visibility
+  const backToTopButton = document.querySelector(".back-to-top");
+  if (backToTopButton) {
+    const toggleBackToTop = () => {
+      if (window.scrollY > 300) {
+        backToTopButton.classList.add("visible");
+      } else {
+        backToTopButton.classList.remove("visible");
+      }
+    };
+
+    // Initial check
+    toggleBackToTop();
+
+    // Listen for scroll (passive for performance)
+    window.addEventListener("scroll", toggleBackToTop, { passive: true });
+  }
+
   // Quote Form Submission via Formspree
   const quoteForm = document.getElementById("quoteForm");
   const formStatus = document.getElementById("formStatus");
