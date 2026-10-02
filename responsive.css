@@ -1,0 +1,370 @@
+/* =========================================
+BLACKWOOD FURNITURES
+PREMIUM RESPONSIVE SYSTEM
+========================================= */
+
+/* =========================================
+LARGE SCREENS (≥1400px)
+========================================= */
+@media (min-width: 1400px) {
+    .container {
+        width: 1200px;
+    }
+
+    .hero-description {
+        font-size: 1.25rem;
+    }
+}
+
+/* =========================================
+TABLETS (≤1024px)
+========================================= */
+@media (max-width: 1024px) {
+    /* HEADER */
+    .navigation {
+        gap: 20px;
+    }
+
+    .nav-links {
+        gap: 18px;
+    }
+
+    .nav-links a {
+        font-size: 0.85rem;
+    }
+
+    /* HERO */
+    .hero-text {
+        max-width: 650px;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    /* TRUST BAR */
+    .trust-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .trust-box {
+        border-bottom: 1px solid var(--border);
+    }
+
+    /* CRAFT SECTION */
+    .craft-grid {
+        gap: 40px;
+    }
+
+    .craft-image img {
+        height: 500px;
+    }
+
+    /* CATEGORY CARDS */
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .category-card {
+        height: 420px;
+    }
+
+    /* FOOTER */
+    .footer-seo {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* =========================================
+MOBILE DEVICES (≤768px)
+========================================= */
+@media (max-width: 768px) {
+    /* CONTAINER */
+    .container {
+        width: 92%;
+    }
+
+    /* HEADER */
+    .header {
+        padding: 20px 0;
+    }
+
+    .logo-main {
+        font-size: 1.6rem;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 28px;
+        cursor: pointer;
+    }
+
+    .navigation {
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: #111;
+        padding: 30px;
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navigation.active {
+        display: flex;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 12px 0;
+    }
+
+    /* HERO */
+    .luxury-hero {
+        min-height: 90vh;
+    }
+
+    .hero-text {
+        text-align: left;
+    }
+
+    .hero-text h1 {
+        font-size: 2.8rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .hero-trust {
+        font-size: 0.85rem;
+    }
+
+    /* TRUST STATS */
+    .floating-trust {
+        margin-top: -30px;
+    }
+
+    .trust-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .trust-box {
+        padding: 25px;
+        border-right: none;
+    }
+
+    /* SECTIONS */
+    .intro-section,
+    .craft-section,
+    .categories-section,
+    .featured-section,
+    .dark-section,
+    .gallery-section,
+    .experience-section,
+    .process-section,
+    .testimonial-section {
+        padding: 70px 0;
+    }
+
+    .section-header {
+        margin-bottom: 45px;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+    }
+
+    /* CRAFT */
+    .craft-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .craft-image img {
+        height: 400px;
+    }
+
+    /* CATEGORY CARDS */
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .category-card {
+        height: 450px;
+    }
+
+    /* FEATURED GRID */
+    .featured-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .featured-main {
+        grid-row: span 1;
+    }
+
+    /* GALLERY */
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item.large {
+        grid-row: span 1;
+    }
+
+    /* PROCESS */
+    .process-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* TESTIMONIALS */
+    .testimonial-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* EXPERIENCE */
+    .experience-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* CTA */
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .premium-cta {
+        min-height: 500px;
+    }
+
+    /* FOOTER */
+    .footer-seo {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .footer-seo ul {
+        align-items: center;
+    }
+
+    /* WHATSAPP */
+    .whatsapp-button {
+        right: 15px;
+        bottom: 15px;
+        padding: 14px 18px;
+        font-size: 0.85rem;
+    }
+}
+
+/* =========================================
+SMALL PHONES (≤400px)
+========================================= */
+@media (max-width: 400px) {
+    .hero-text h1 {
+        font-size: 2.3rem;
+    }
+
+    .logo-main {
+        font-size: 1.4rem;
+    }
+
+    .category-card {
+        height: 380px;
+    }
+
+    .whatsapp-button {
+        width: 55px;
+        height: 55px;
+        overflow: hidden;
+        padding: 18px;
+        border-radius: 50%;
+        font-size: 0;
+    }
+}
+
+/* =========================================
+HIDE MOBILE MENU BUTTON ON LARGER SCREENS
+========================================= */
+@media (min-width: 769px) {
+    .mobile-menu-btn {
+        display: none !important;
+    }
+}
+
+/* =========================================
+NEW COMPONENTS — RESPONSIVE
+========================================= */
+
+/* TABLETS (≤1024px) */
+@media (max-width: 1024px) {
+    .pillar-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    .hero-proof {
+        font-size: 0.86rem;
+    }
+}
+
+/* MOBILE (≤768px) */
+@media (max-width: 768px) {
+    /* HERO */
+    .hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.18em; }
+    .hero-risk-reversal { font-size: 0.85rem; }
+    .hero-proof {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        font-size: 0.85rem;
+        line-height: 1.6;
+    }
+
+    /* PILLARS */
+    .pillar-grid { grid-template-columns: 1fr; }
+    .pillar-card { padding: 26px 22px; }
+
+    /* FAQ */
+    .faq-item summary { font-size: 0.98rem; padding: 18px 20px; }
+    .faq-item summary::after { font-size: 1.5rem; }
+    .faq-answer { padding: 0 20px 22px; font-size: 0.95rem; }
+
+    /* CASE STUDIES */
+    .case-study-card img { height: 200px; }
+    .case-study-body { padding: 22px 20px; }
+    .case-study-meta { gap: 18px; }
+    .case-study-meta span em { font-size: 0.88rem; }
+
+    /* TESTIMONIALS */
+    .testimonial-meta { gap: 12px; }
+    .testimonial-avatar { width: 40px; height: 40px; font-size: 1rem; }
+
+    /* FORM */
+    .quote-form { padding: 28px 22px; }
+    .quote-form input,
+    .quote-form select,
+    .quote-form textarea { padding: 13px 14px; font-size: 0.98rem; }
+}
+
+/* SMALL PHONES (≤400px) */
+@media (max-width: 400px) {
+    .hero-proof { font-size: 0.8rem; }
+    .case-study-meta { flex-direction: column; gap: 12px; }
+    .form-risk { font-size: 0.8rem; }
+}

@@ -1,202 +1,230 @@
 /* =========================================
-BLACKWOOD FURNITURES – PREMIUM JAVASCRIPT
+BLACKWOOD FURNITURES — FRONTEND JS v2
 ========================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Mobile Menu
-  const menuButton = document.querySelector(".mobile-menu-btn");
-  const navigation = document.querySelector(".navigation");
 
-  if (menuButton && navigation) {
-    menuButton.addEventListener("click", () => {
-      navigation.classList.toggle("active");
-      menuButton.classList.toggle("open");
-      const expanded = navigation.classList.contains("active");
-      menuButton.setAttribute("aria-expanded", expanded);
-    });
+    /* =========================================
+    MOBILE MENU
+    ========================================= */
+    const menuButton = document.querySelector(".mobile-menu-btn");
+    const navigation = document.querySelector(".navigation");
 
-    navigation.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        navigation.classList.remove("active");
-        menuButton.classList.remove("open");
-        menuButton.setAttribute("aria-expanded", "false");
-      });
-    });
-  }
-
-  // Sticky Header
-  const header = document.querySelector(".header");
-  if (header) {
-    window.addEventListener("scroll", () => {
-      header.classList.toggle("scrolled", window.scrollY > 80);
-    });
-  }
-
-  // Scroll Reveal
-  const revealElements = document.querySelectorAll(".reveal");
-  if (revealElements.length) {
-    const revealObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-            revealObserver.unobserve(entry.target);
-          }
+    if (menuButton && navigation) {
+        menuButton.addEventListener("click", () => {
+            navigation.classList.toggle("active");
+            menuButton.classList.toggle("open");
         });
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -50px 0px" }
-    );
-    revealElements.forEach((el) => revealObserver.observe(el));
-  }
-
-  // Animated Counters
-  const counters = document.querySelectorAll(".trust-box h2");
-  if (counters.length) {
-    const counterObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            animateCounter(entry.target);
-            counterObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-    counters.forEach((counter) => counterObserver.observe(counter));
-  }
-
-  function animateCounter(element) {
-    const text = element.innerText;
-    const matches = text.match(/[\d+]+/g);
-    const number = matches ? parseInt(matches[0].replace(/[^\d]/g, ""), 10) : 0;
-    const suffix = text.replace(matches[0], "").trim();
-    if (number === 0) {
-      element.innerText = "0" + suffix;
-      return;
     }
-    let current = 0;
-    const increment = number / 80;
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= number) {
-        element.innerText = number + suffix;
-        clearInterval(timer);
-      } else {
-        element.innerText = Math.floor(current) + suffix;
-      }
-    }, 20);
-  }
 
-  // Smooth Scroll for Internal Anchors
-  document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener("click", (e) => {
-      const targetId = link.getAttribute("href");
-      if (targetId === "#" || targetId === "") return;
-      const target = document.querySelector(targetId);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+    /* =========================================
+    STICKY HEADER
+    ========================================= */
+    const header = document.querySelector(".header");
+    if (header) {
+        window.addEventListener("scroll", () => {
+            header.classList.toggle("scrolled", window.scrollY > 80);
+        }, { passive: true });
+    }
+
+    /* =========================================
+    SCROLL REVEAL
+    ========================================= */
+    const revealElements = document.querySelectorAll(".reveal");
+    if (revealElements.length) {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+
+        revealElements.forEach((el) => revealObserver.observe(el));
+    }
+
+    /* =========================================
+    ANIMATED COUNTERS
+    (skips non-integers like "4.8★" — those display as static)
+    ========================================= */
+    const counters = document.querySelectorAll(".trust-box h2");
+    if (counters.length) {
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach((counter) => counterObserver.observe(counter));
+    }
+
+    function animateCounter(element) {
+        const raw = element.innerText.trim();
+
+        // Only animate pure integers with optional + or % suffix.
+        // Anything else (e.g. "4.8★", "Since 2010") is left static.
+        if (!/^\d+[+%]?$/.test(raw)) return;
+
+        const number = parseInt(raw.replace(/\D/g, ""), 10) || 0;
+        const suffix = raw.replace(/[0-9]/g, "");
+        if (number === 0) { element.innerText = "0" + suffix; return; }
+
+        let current = 0;
+        const increment = number / 60;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= number) {
+                element.innerText = number + suffix;
+                clearInterval(timer);
+            } else {
+                element.innerText = Math.floor(current) + suffix;
+            }
+        }, 22);
+    }
+
+    /* =========================================
+    SMOOTH SCROLL FOR INTERNAL ANCHORS
+    ========================================= */
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", (e) => {
+            const targetId = link.getAttribute("href");
+            if (!targetId || targetId === "#") return;
+            const target = document.querySelector(targetId);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
+                // close mobile menu if open
+                if (navigation) navigation.classList.remove("active");
+                if (menuButton) menuButton.classList.remove("open");
+            }
+        });
     });
-  });
 
-  // WhatsApp click tracking
-  document.querySelectorAll(".whatsapp-button").forEach((button) => {
-    button.addEventListener("click", () => {
-      if (typeof gtag === "function") {
-        gtag("event", "whatsapp_click");
-      }
+    /* =========================================
+    LAZY LOAD IMAGES (fallback for older browsers)
+    ========================================= */
+    document.querySelectorAll("img").forEach((image) => {
+        if (!image.hasAttribute("loading")) image.setAttribute("loading", "lazy");
     });
-  });
 
-  // Active Navigation State
-  const navLinks = document.querySelectorAll(".nav-links a");
-  function setActiveLink() {
-    const hash = window.location.hash;
-    navLinks.forEach((link) => {
-      link.classList.remove("active");
-      if (link.getAttribute("href") === hash) {
-        link.classList.add("active");
-      }
-    });
-  }
-  window.addEventListener("hashchange", setActiveLink);
-  setActiveLink();
+    /* =========================================
+    QUOTE FORM — LEAD CAPTURE
+    ------------------------------------------------------------
+    SUBMITS VIA WHATSAPP DEEP LINK (no backend required).
+    This captures the lead immediately in the channel where
+    Kenyan buyers actually respond.
 
-  // Back to Top Button visibility
-  const backToTopButton = document.querySelector(".back-to-top");
-  if (backToTopButton) {
-    const toggleBackToTop = () => {
-      if (window.scrollY > 300) {
-        backToTopButton.classList.add("visible");
-      } else {
-        backToTopButton.classList.remove("visible");
-      }
-    };
+    TO SWAP IN A REAL BACKEND LATER:
+      1. Replace the window.open(...) block below with:
+           fetch('https://formspree.io/f/YOUR_ID', {
+             method: 'POST',
+             headers: { 'Content-Type': 'application/json' },
+             body: JSON.stringify(payload)
+           }).then(() => { window.location.href = '/thank-you'; });
+      2. Update the success handling accordingly.
+    ========================================= */
+    const quoteForm = document.getElementById("quote-form");
+    const BUSINESS_WHATSAPP = "254702555093";
 
-    // Initial check
-    toggleBackToTop();
+    if (quoteForm) {
+        quoteForm.addEventListener("submit", (event) => {
+            event.preventDefault();
 
-    // Listen for scroll (passive for performance)
-    window.addEventListener("scroll", toggleBackToTop, { passive: true });
-  }
+            const nameField  = document.getElementById("quote-name");
+            const phoneField = document.getElementById("quote-phone");
+            const typeField  = document.getElementById("quote-type");
 
-  // Quote Form Submission via Formspree
-  const quoteForm = document.getElementById("quoteForm");
-  const formStatus = document.getElementById("formStatus");
+            let valid = true;
+            [nameField, phoneField, typeField].forEach((field) => {
+                field.style.borderColor = "";
+                if (!field.value.trim()) {
+                    field.style.borderColor = "#c7a24f";
+                    valid = false;
+                }
+            });
 
-  if (quoteForm) {
-    quoteForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
+            if (!valid) {
+                const firstInvalid = quoteForm.querySelector('input[style*="c7a24f"], select[style*="c7a24f"]');
+                if (firstInvalid) firstInvalid.focus();
+                return;
+            }
 
-      const name = document.getElementById("quote-name").value.trim();
-      const email = document.getElementById("quote-email").value.trim();
-      const project = document.getElementById("quote-type").value;
-      const message = document.getElementById("quote-message").value.trim();
+            const payload = {
+                name: nameField.value.trim(),
+                phone: phoneField.value.trim(),
+                type: typeField.value,
+                source: "website_quote_form",
+                page: window.location.href,
+                ts: new Date().toISOString()
+            };
 
-      if (!name || !email || !project || !message) {
-        formStatus.textContent = "Please fill in all required fields.";
-        formStatus.className = "form-error";
-        return;
-      }
+            // Analytics event
+            if (typeof gtag === "function") {
+                gtag("event", "generate_lead", {
+                    event_category: "quote_form",
+                    event_label: payload.type
+                });
+            }
 
-      if (!email.includes("@") || !email.includes(".")) {
-        formStatus.textContent = "Please enter a valid email address.";
-        formStatus.className = "form-error";
-        return;
-      }
+            // Build WhatsApp message
+            const labelMap = {
+                sofa: "Sofa / Living Room",
+                bed: "Bed / Bedroom",
+                wardrobe: "Wardrobe",
+                dining: "Dining Set",
+                "tv-unit": "TV Unit / Shelving",
+                office: "Office Fit-Out",
+                hotel: "Hotel / Bulk Project",
+                other: "Something Else"
+            };
 
-      const formData = new FormData(quoteForm);
-      const submitBtn = quoteForm.querySelector("button[type='submit']");
-      submitBtn.textContent = "Sending...";
-      submitBtn.disabled = true;
-      formStatus.textContent = "";
-      formStatus.className = "";
+            const message =
+                `Hi Blackwood, I'd like a quote.\n\n` +
+                `Name: ${payload.name}\n` +
+                `WhatsApp: ${payload.phone}\n` +
+                `Project: ${labelMap[payload.type] || payload.type}\n\n` +
+                `Sent from blackwoodfurnitures.co.ke`;
 
-      try {
-        const response = await fetch(quoteForm.action, {
-          method: "POST",
-          body: formData,
-          headers: { Accept: "application/json" }
+            const waURL = `https://wa.me/${BUSINESS_WHATSAPP}?text=${encodeURIComponent(message)}`;
+
+            // Open WhatsApp (works on mobile app + WhatsApp Web)
+            window.open(waURL, "_blank", "noopener");
+
+            // Reset form + light confirmation
+            quoteForm.reset();
+            const btn = quoteForm.querySelector('button[type="submit"]');
+            if (btn) {
+                const original = btn.innerText;
+                btn.innerText = "✓ Opening WhatsApp…";
+                btn.disabled = true;
+                setTimeout(() => {
+                    btn.innerText = original;
+                    btn.disabled = false;
+                }, 3000);
+            }
         });
 
-        if (response.ok) {
-          formStatus.textContent = "Thank you! We'll get back to you within 24 hours.";
-          formStatus.className = "form-success";
-          quoteForm.reset();
-        } else {
-          const data = await response.json();
-          formStatus.textContent = data.error || "Something went wrong. Please try again.";
-          formStatus.className = "form-error";
+        // Clear error state on input
+        quoteForm.querySelectorAll("input, select").forEach((field) => {
+            field.addEventListener("input", () => { field.style.borderColor = ""; });
+            field.addEventListener("change", () => { field.style.borderColor = ""; });
+        });
+    }
+
+    /* =========================================
+    ACTIVE NAV HIGHLIGHT
+    ========================================= */
+    const currentPath = window.location.pathname;
+    document.querySelectorAll(".nav-links a").forEach((link) => {
+        const linkPath = new URL(link.href, window.location.origin).pathname;
+        if (linkPath === currentPath ||
+            (currentPath === "/" && linkPath.endsWith("index.html"))) {
+            link.classList.add("active");
         }
-      } catch (error) {
-        formStatus.textContent = "Network error. Please check your connection and try again.";
-        formStatus.className = "form-error";
-      } finally {
-        submitBtn.textContent = "Send Request";
-        submitBtn.disabled = false;
-      }
     });
-  }
+
 });
